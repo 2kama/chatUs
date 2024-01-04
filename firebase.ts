@@ -1,25 +1,38 @@
-import * as firebase from 'firebase/app'
-import { getAuth, onAuthStateChanged, getReactNativePersistence, initializeAuth, User, updateProfile, createUserWithEmailAndPassword } from "firebase/auth"
-import { getFirestore } from "firebase/firestore"
-import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
-
+import * as firebase from "firebase/app";
+import {
+  getAuth,
+  onAuthStateChanged,
+  getReactNativePersistence,
+  initializeAuth,
+  User,
+  updateProfile,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut
+} from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 
 const firebaseConfig = {
-    //YOUR FIREBASE CONFIG CREDENTIALS
-    
+  //YOUR FIREBASE CONFIG CREDENTIALS
 };
 
-
-const app = firebase.initializeApp(firebaseConfig)
+const app = firebase.initializeApp(firebaseConfig);
 
 initializeAuth(app, {
-  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
-})
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+});
 
+const db = getFirestore(app);
+const auth = getAuth(app);
 
-  const db = getFirestore(app);
-  const auth = getAuth(app);
-
-
-  export { db, auth, onAuthStateChanged, User, updateProfile, createUserWithEmailAndPassword }
-
+export {
+  db,
+  auth,
+  onAuthStateChanged,
+  User,
+  updateProfile,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut
+};
