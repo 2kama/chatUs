@@ -1,15 +1,15 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Image } from "@rneui/base";
+import { Image, Button, Input } from "@rneui/base";
 import tw from "twrnc";
-import { Button, Input } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+
 
   const signIn = () => {
 
@@ -19,10 +19,8 @@ const LoginScreen = () => {
     <View style={tw`flex-1 items-center justify-center p-2 bg-white`}>
       <StatusBar style="light" />
       <Image
-        source={{
-          uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Signal-Logo.svg/2048px-Signal-Logo.svg.png",
-        }}
-        style={tw`w-36 h-36 mb-8 rounded`}
+        source={require('../assets/logo.png')}
+        style={tw`w-36 h-36 mb-8 rounded-lg`}
       />
       <View style={tw`w-80`}>
         <Input
@@ -30,6 +28,7 @@ const LoginScreen = () => {
           autoFocus
           value={email}
           onChangeText={(text) => setEmail(text)}
+          keyboardType="email-address"
         />
         <Input
           placeholder="Password"

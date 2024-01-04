@@ -1,8 +1,9 @@
 import { View } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import tw from 'twrnc'
-import { Button, Input, Text } from '@rneui/themed'
+import { Button, Input, Text } from '@rneui/base'
 import { useNavigation } from '@react-navigation/native'
+import { auth, createUserWithEmailAndPassword, updateProfile } from '../firebase'
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -13,12 +14,20 @@ const RegisterScreen = () => {
 
 
   const register = () => {
-
+    createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+            updateProfile(auth.currentUser!, {
+                displayName: name,
+                photoURL: imageURL || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+            })
+        }).catch((error) => {
+            console.log(error)
+        })
   }
 
   useLayoutEffect(() => {
     navigation.setOptions({
-        headerBackTitle: "ABC"
+        headerBackTitle: "Back to Login"
     })
   }, [navigation])
 
