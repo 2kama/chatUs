@@ -9,6 +9,7 @@ import HomeScreen from "./screens/HomeScreen";
 import { useEffect, useState } from "react";
 import { auth, onAuthStateChanged, User } from "./firebase";
 import SplashScreen from "./screens/SplashScreen";
+import AddChatScreen from "./screens/AddChatScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,7 @@ export default function App() {
                 ) : (
                   <>
                     <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="AddChat" component={AddChatScreen} />
                   </>
                 )
               ) : (
