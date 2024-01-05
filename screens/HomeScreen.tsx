@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
-import React, { useEffect, useLayoutEffect } from "react";
-import { auth, signOut } from "../firebase";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { DocumentData, auth, collection, db, onSnapshot, query, signOut } from "../firebase";
 import CustomListItem from "../components/CustomListItem";
 import { useNavigation } from "@react-navigation/native";
 import tw from "twrnc";
@@ -9,6 +9,20 @@ import { AntDesign, SimpleLineIcons } from "@expo/vector-icons"
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+
+  const [ chats, setChats ] = useState<{ id: string; data: DocumentData; }[]>([]);
+
+  useEffect(() => {
+    const q = query(collection(db, "chats"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        setChats(querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            data: doc.data()
+        })))
+    });
+
+    return unsubscribe
+  })
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -37,8 +51,11 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <ScrollView>
-      <CustomListItem />
+    <ScrollView style={tw`h-full`}>
+        {chats.map(({ id, data: { chatName }}) => (
+            <CustomListItem id={id} chatName={chatName} key={id} />
+        ))}
+      
     </ScrollView>
   );
 };

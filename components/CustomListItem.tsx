@@ -5,7 +5,7 @@ import tw from 'twrnc'
 
 const CustomListItem = ({ id, chatName, enterChat }: { id: string; chatName: string; enterChat: boolean }) => {
   return (
-    <ListItem>
+    <ListItem key={id} bottomDivider>
         <Avatar
           rounded
           source={{
@@ -14,7 +14,7 @@ const CustomListItem = ({ id, chatName, enterChat }: { id: string; chatName: str
         />
         <ListItem.Content>
             <ListItem.Title style={tw`font-bold`}>
-                Youtube Chat
+                {chatName}
             </ListItem.Title>
             <ListItem.Subtitle numberOfLines={1} ellipsizeMode='tail'>
                 This is a test Subtitle
