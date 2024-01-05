@@ -1,11 +1,13 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Avatar, ListItem } from '@rneui/base'
 import tw from 'twrnc'
 
-const CustomListItem = ({ id, chatName, enterChat }: { id: string; chatName: string; enterChat: boolean }) => {
+const CustomListItem = ({ id, chatName, enterChat }: { id: string; chatName: string; enterChat: (id: string, chatName: string) => void }) => {
   return (
-    <ListItem key={id} bottomDivider>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => enterChat(id, chatName)}>
+
+<ListItem key={id} bottomDivider>
         <Avatar
           rounded
           source={{
@@ -13,14 +15,17 @@ const CustomListItem = ({ id, chatName, enterChat }: { id: string; chatName: str
           }}
         />
         <ListItem.Content>
-            <ListItem.Title style={tw`font-bold`}>
+            <ListItem.Title style={tw`font-bold text-xl`}>
                 {chatName}
             </ListItem.Title>
-            <ListItem.Subtitle numberOfLines={1} ellipsizeMode='tail'>
+            <ListItem.Subtitle style={tw`text-gray-400`} numberOfLines={1} ellipsizeMode='tail'>
                 This is a test Subtitle
             </ListItem.Subtitle>
         </ListItem.Content>
     </ListItem>
+
+    </TouchableOpacity>
+    
   )
 }
 

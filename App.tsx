@@ -6,10 +6,11 @@ import LoginScreen from "./screens/LoginScreen";
 import { KeyboardAvoidingView, Platform } from "react-native";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
-import { useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { auth, onAuthStateChanged, User } from "./firebase";
 import SplashScreen from "./screens/SplashScreen";
 import AddChatScreen from "./screens/AddChatScreen";
+import ChatScreen from "./screens/ChatScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,7 +41,7 @@ export default function App() {
         <SafeAreaProvider>
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
-            keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}
+            keyboardVerticalOffset={0}
             style={{ flex: 1 }}
           >
             <Stack.Navigator screenOptions={globalScreenOptions}>
@@ -53,6 +54,7 @@ export default function App() {
                   <>
                     <Stack.Screen name="Home" component={HomeScreen} />
                     <Stack.Screen name="AddChat" component={AddChatScreen} />
+                    <Stack.Screen name="Chat" component={ChatScreen as FunctionComponent<{}>} />
                   </>
                 )
               ) : (
