@@ -8,9 +8,19 @@ import {
   updateProfile,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc, onSnapshot, query, DocumentData, serverTimestamp } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  DocumentData,
+  serverTimestamp,
+  orderBy,
+  limit
+} from "firebase/firestore";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 
 const firebaseConfig = {
@@ -40,5 +50,7 @@ export {
   onSnapshot,
   query,
   DocumentData,
-  serverTimestamp
+  serverTimestamp,
+  orderBy,
+  limit
 };
