@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { DocumentData, auth, collection, db, onSnapshot, query, signOut } from "../firebase";
+import { DocumentData, auth, collection, db, onSnapshot, orderBy, query, signOut } from "../firebase";
 import CustomListItem from "../components/CustomListItem";
 import { useNavigation } from "@react-navigation/native";
 import tw from "twrnc";
@@ -13,7 +13,7 @@ const HomeScreen = () => {
   const [ chats, setChats ] = useState<{ id: string; data: DocumentData; }[]>([]);
 
   useEffect(() => {
-    const q = query(collection(db, "chats"));
+    const q = query(collection(db, "chats"), orderBy("timestamp", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
         setChats(querySnapshot.docs.map(doc => ({
             id: doc.id,

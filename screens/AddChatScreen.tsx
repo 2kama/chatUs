@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import tw from 'twrnc'
 import { Button, Input } from '@rneui/base'
 import Icon from "react-native-vector-icons/FontAwesome"
-import { addDoc, collection, db } from '../firebase'
+import { addDoc, collection, db, serverTimestamp } from '../firebase'
 
 const AddChatScreen = () => {
 
@@ -21,7 +21,8 @@ const AddChatScreen = () => {
 
     const createChat = async () => {
         await addDoc(collection(db, "chats"), {
-            chatName: input
+            chatName: input,
+            timestamp: serverTimestamp()
         }).then(() => {
             navigation.goBack()
         })

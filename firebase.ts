@@ -19,7 +19,9 @@ import {
   DocumentData,
   serverTimestamp,
   orderBy,
-  limit
+  limit,
+  updateDoc,
+  doc
 } from "firebase/firestore";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -52,5 +54,7 @@ export {
   DocumentData,
   serverTimestamp,
   orderBy,
-  limit
+  limit,
+  updateDoc,
+  doc
 };

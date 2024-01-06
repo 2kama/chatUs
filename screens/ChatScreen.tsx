@@ -8,7 +8,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import React, { LegacyRef, MutableRefObject, useLayoutEffect, useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Avatar } from "@rneui/base";
 import tw from "twrnc";
@@ -20,10 +20,12 @@ import {
   auth,
   collection,
   db,
+  doc,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  updateDoc,
 } from "../firebase";
 
 const ChatScreen = ({
@@ -38,6 +40,7 @@ const ChatScreen = ({
   const [messages, setMessages] = useState<
     { id: string; data: DocumentData }[]
   >([]);
+  const scrollViewRef = useRef<any>();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -81,9 +84,14 @@ const ChatScreen = ({
       photoURL: auth.currentUser?.photoURL,
     })
       .then(() => {
+        
         setInput("");
       })
       .catch((err) => console.log(err));
+
+      await updateDoc(doc(db, `chats/${id}`), {
+         timestamp: serverTimestamp()  
+      })
   };
 
   useLayoutEffect(() => {
@@ -117,7 +125,7 @@ const ChatScreen = ({
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <>
-          <ScrollView style={tw`flex-1`}>
+          <ScrollView style={tw`flex-1`} ref={scrollViewRef} onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}>
             {messages.map(({ id, data }, index) =>
               data.email === auth.currentUser?.email ? (
                 <View
