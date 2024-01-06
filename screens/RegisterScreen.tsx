@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useState } from 'react'
 import tw from 'twrnc'
 import { Button, Input, Text } from '@rneui/base'
 import { useNavigation } from '@react-navigation/native'
-import { auth, createUserWithEmailAndPassword, updateProfile } from '../firebase'
+import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from '../firebase'
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
@@ -23,6 +23,11 @@ const RegisterScreen = () => {
                 auth.currentUser?.reload();
             });
             
+        }).then(() => {
+            //I did this bcos firebase doesn't show updated values of users until the session is reloaded
+            signOut(auth).then(() => {
+                signInWithEmailAndPassword(auth, email, password);
+            })
         }).catch((error) => {
             console.log(error)
         })
