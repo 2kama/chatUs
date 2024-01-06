@@ -4,18 +4,23 @@ import { StatusBar } from "expo-status-bar";
 import { Image, Button, Input } from "@rneui/base";
 import tw from "twrnc";
 import { useNavigation } from "@react-navigation/native";
-import { auth, signInWithEmailAndPassword } from '../firebase'
+import { auth, signInWithEmailAndPassword } from "../firebase";
+import ErrorBox from "../components/ErrorBox";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [errorCode, setErrorCode] = useState("");
+  const [disableBtn, setDisableBtn] = useState(false);
 
   const signIn = () => {
-    signInWithEmailAndPassword(auth, email, password)
-        .catch((error) => {
-
-        })
+    setErrorCode("");
+    setDisableBtn(true);
+    signInWithEmailAndPassword(auth, email, password).catch((error: any) => {
+      setErrorCode(error.code);
+      setDisableBtn(false);
+    });
   };
 
   return (
@@ -40,6 +45,7 @@ const LoginScreen = () => {
           onChangeText={(text) => setPassword(text)}
           onSubmitEditing={signIn}
         />
+        {errorCode && <ErrorBox code={errorCode} />}
       </View>
 
       <Button
@@ -47,6 +53,7 @@ const LoginScreen = () => {
         onPress={signIn}
         raised
         containerStyle={tw`w-60 mt-4 rounded`}
+        disabled={disableBtn}
       />
       <Button
         title="Register"
