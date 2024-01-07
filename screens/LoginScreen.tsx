@@ -27,7 +27,7 @@ const LoginScreen = () => {
     <View style={tw`flex-1 items-center justify-center p-2 bg-white`}>
       <StatusBar style="light" />
       <Image
-        source={require("../assets/logo.png")}
+        source={require("../assets/adaptive-icon.png")}
         style={tw`w-36 h-36 mb-8 rounded-lg`}
       />
       <View style={tw`w-80`}>
