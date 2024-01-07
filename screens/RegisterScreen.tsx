@@ -60,7 +60,7 @@ const RegisterScreen = () => {
 
   return (
     <View style={tw`flex-1 items-center justify-center p-2 bg-white`}>
-      <Text style={tw`mb-12 text-3xl`}>Create a Zignal Account</Text>
+      <Text style={tw`mb-12 text-3xl`}>Create a chatUs Account</Text>
 
       <View style={tw`w-80`}>
         <Input

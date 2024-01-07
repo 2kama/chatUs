@@ -158,7 +158,7 @@ const ChatScreen = ({
           </ScrollView>
           <View style={tw`flex-row items-center w-full p-4`}>
             <TextInput
-              placeholder="Zignal Message"
+              placeholder="chatUs Message"
               value={input}
               onChangeText={(text) => setInput(text)}
               style={tw`bottom-0 h-12 flex-1 mr-4 p-3 border-0 bg-[#ececec] text-gray-500 rounded-full`}

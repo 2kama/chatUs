@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "zignal",
-    "slug": "zignal",
+    "name": "chatUs",
+    "slug": "chatUs",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "buildNumber": "1",
-      "bundleIdentifier": "io.kama.zignal"
+      "bundleIdentifier": "io.kama.chatus"
     },
     "android": {
       "versionCode": 1,
@@ -28,7 +28,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "io.kama.zignal"
+      "package": "io.kama.chatus"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -51,7 +51,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "cd9ca11d-d40e-4b8b-871c-0bfa64150c31"
+        "projectId": "3f92d37a-ea75-4812-b729-c95d2d593cce"
       }
     }
   }
